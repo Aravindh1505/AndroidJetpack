@@ -1,0 +1,7 @@
+[packages]
+com.aravindh.androidjetpack = raa
+
+[localazy]
+allStringsUploaded = true
+showWelcomeMessage = false
+
