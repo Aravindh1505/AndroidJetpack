@@ -1,30 +1,32 @@
 package com.aravindh.androidjetpack
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.aravindh.androidjetpack.base.JetPackApplication
+import com.aravindh.androidjetpack.databinding.ActivityMainBinding
 import com.localazy.android.Localazy
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG = MainActivity::class.java.simpleName
-
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setTheme(R.style.AppTheme)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        locale()
+        setupLoginRepository()
+
+        binding.buttonLogin.setOnClickListener {
+            setupLoginRepository()
+        }
+
     }
 
-    private fun locale() {
-        val currentLocale: Locale = Localazy.getCurrentLocale()
-        Log.d(TAG, "lang : ${currentLocale.language}")
-
-        Log.d(TAG, "isEnabled : ${Localazy.isEnabled()}")
-
-        val localeHi = Locale("ta")
-        Localazy.forceLocale(localeHi, false)
+    private fun setupLoginRepository() {
+        val loginContainer = (application as JetPackApplication).loginContainer
+        loginContainer.loginRepository.login()
     }
 }

@@ -1,47 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        tools:context=".MainActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/welcome"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal" />
+    <data>
 
-    <com.google.android.material.textfield.TextInputEditText
+    </data>
+
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="@string/prompt_email"
-            android:inputType="text"
-            android:padding="5dp"
-            android:textSize="16sp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            tools:context=".MainActivity">
 
-    <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="@string/prompt_password"
-            android:inputType="text"
-            android:padding="5dp"
-            android:textSize="16sp" />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/welcome"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal" />
 
-    <Button
-            android:layout_marginTop="30dp"
-            android:textColor="#FFFFFF"
-            android:text="@string/action_sign_in"
-            android:background="@color/colorAccent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/prompt_email"
+                android:inputType="text"
+                android:padding="5dp"
+                android:textSize="16sp" />
 
-</LinearLayout>
+        <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/prompt_password"
+                android:inputType="text"
+                android:padding="5dp"
+                android:textSize="16sp" />
+
+        <Button
+                android:id="@+id/buttonLogin"
+                android:layout_marginTop="30dp"
+                android:textColor="#FFFFFF"
+                android:text="@string/action_sign_in"
+                android:background="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</layout>
