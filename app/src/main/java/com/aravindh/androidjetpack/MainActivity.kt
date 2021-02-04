@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.aravindh.androidjetpack.base.JetPackApplication
 import com.aravindh.androidjetpack.databinding.ActivityMainBinding
-import com.localazy.android.Localazy
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
