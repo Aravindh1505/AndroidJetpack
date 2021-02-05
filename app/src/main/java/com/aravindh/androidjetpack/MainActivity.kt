@@ -1,12 +1,17 @@
 package com.aravindh.androidjetpack
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.aravindh.androidjetpack.base.BaseActivity
 import com.aravindh.androidjetpack.base.JetPackApplication
 import com.aravindh.androidjetpack.databinding.ActivityMainBinding
+import com.aravindh.androidjetpack.di.manual.LoginRepository
+import com.aravindh.androidjetpack.utils.Logger
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -15,16 +20,9 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        setupLoginRepository()
+        Logger.d("testString : $testString")
 
-        binding.buttonLogin.setOnClickListener {
-            setupLoginRepository()
-        }
 
-    }
-
-    private fun setupLoginRepository() {
-        val loginContainer = (application as JetPackApplication).loginContainer
-        loginContainer.loginRepository.login()
+        loginRepository.login()
     }
 }

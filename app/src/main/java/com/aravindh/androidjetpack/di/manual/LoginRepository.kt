@@ -1,8 +1,9 @@
 package com.aravindh.androidjetpack.di.manual
 
 import com.aravindh.androidjetpack.utils.Logger
+import javax.inject.Inject
 
-class LoginRepository(
+class LoginRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) {
