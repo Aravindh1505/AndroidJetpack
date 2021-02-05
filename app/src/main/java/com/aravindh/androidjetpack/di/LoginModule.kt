@@ -1,4 +1,4 @@
-package com.aravindh.androidjetpack.di.manual
+package com.aravindh.androidjetpack.di
 
 import android.app.Application
 import dagger.Module

@@ -1,4 +1,4 @@
-package com.aravindh.androidjetpack.di.manual
+package com.aravindh.androidjetpack.di
 
 import com.aravindh.androidjetpack.utils.Logger
 import javax.inject.Inject
