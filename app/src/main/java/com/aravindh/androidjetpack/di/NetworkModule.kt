@@ -3,6 +3,7 @@ package com.aravindh.androidjetpack.di
 import com.aravindh.androidjetpack.network.ApiConstant.BASE_URL
 import com.aravindh.androidjetpack.network.NetworkRepository
 import com.aravindh.androidjetpack.network.NetworkRepositoryApi
+import com.aravindh.androidjetpack.utils.Logger
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -14,6 +15,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -43,6 +45,9 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+        Logger.d("okHttpClient : $okHttpClient")
+        Logger.d("gson : $gson")
+
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -51,15 +56,41 @@ object NetworkModule {
             .build()
     }
 
-    @Singleton
+
+    /*@Singleton
     @Provides
-    fun provideNetworkRepositoryApi(retrofit: Retrofit): NetworkRepositoryApi? {
-        return retrofit.create(NetworkRepositoryApi::class.java)
-    }
+    fun provideNetworkRepositoryApi(retrofit: Retrofit): NetworkRepository {
+        return NetworkRepository(retrofit.create(NetworkRepositoryApi::class.java))
+    }*/
 
     @Singleton
     @Provides
-    fun provideNetworkRepository(networkRepositoryApi: NetworkRepositoryApi): NetworkRepository {
-        return NetworkRepository(networkRepositoryApi)
+    @Named("token")
+    fun getToken() : String{
+        return  "Token BuvYvhvyhcfkgufJvhf768686Hvhchvh"
+    }
+
+
+    @Singleton
+    @Provides
+    fun createNetworkRepository(): NetworkRepository {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+            .connectTimeout((180).toLong(), TimeUnit.SECONDS)
+            .readTimeout((180).toLong(), TimeUnit.SECONDS)
+            .writeTimeout((180).toLong(), TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
+            .build()
+
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(Gson()))
+            .build()
+
+        return NetworkRepository(retrofit.create(NetworkRepositoryApi::class.java))
     }
 }

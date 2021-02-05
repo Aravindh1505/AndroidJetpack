@@ -1,12 +1,14 @@
 package com.aravindh.androidjetpack.network
 
-import io.reactivex.Observable
-import retrofit2.http.POST
+import com.aravindh.androidjetpack.network.ApiConstant.GET_EMPLOYEES
+import com.aravindh.androidjetpack.ui.login.EmployeesResponse
+import retrofit2.Call
+import retrofit2.http.GET
 
 interface NetworkRepositoryApi {
 
-    @POST(ApiConstant.SIGN_IN)
-    fun getSignIn(): Observable<String>?
+    @GET(GET_EMPLOYEES)
+    suspend fun getEmployees(): List<EmployeesResponse>?
 
-    fun getData() = "This is sample data"
+
 }

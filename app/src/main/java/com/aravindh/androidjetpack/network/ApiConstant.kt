@@ -2,7 +2,7 @@ package com.aravindh.androidjetpack.network
 
 object ApiConstant {
 
-    const val BASE_URL = ""
+    const val BASE_URL = "http://dummy.restapiexample.com/api/v1/"
 
-    const val SIGN_IN = ""
+    const val GET_EMPLOYEES = "employees"
 }
