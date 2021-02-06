@@ -1,6 +1,5 @@
 package com.aravindh.androidjetpack.ui.login
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.aravindh.androidjetpack.network.NetworkRepository

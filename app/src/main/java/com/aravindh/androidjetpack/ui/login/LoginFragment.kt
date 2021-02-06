@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         Logger.d("SUCCESS")
-                        resource.data?.let { users -> retrieveList(users) }
+                        resource.data?.let { world -> world.toString() }
                     }
                     Status.ERROR -> {
                         Logger.d("ERROR")
@@ -55,9 +55,5 @@ class LoginFragment : Fragment() {
                 }
             }
         })
-    }
-
-    private fun retrieveList(employeesResponse: List<EmployeesResponse>) {
-        Logger.d(employeesResponse.size.toString())
     }
 }

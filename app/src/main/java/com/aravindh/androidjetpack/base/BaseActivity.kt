@@ -10,9 +10,5 @@ import javax.inject.Named
 open class BaseActivity : AppCompatActivity() {
 
     @Inject
-    @Named("token")
-    lateinit var token: String
-
-    @Inject
     lateinit var networkRepository: NetworkRepository
 }

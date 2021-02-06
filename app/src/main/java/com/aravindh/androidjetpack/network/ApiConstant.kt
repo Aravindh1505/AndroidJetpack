@@ -2,7 +2,7 @@ package com.aravindh.androidjetpack.network
 
 object ApiConstant {
 
-    const val BASE_URL = "http://dummy.restapiexample.com/api/v1/"
+    const val BASE_URL = "http://bloodambulance.com/stayhome/php/v1/"
 
-    const val GET_EMPLOYEES = "employees"
+    const val GET_EMPLOYEES = "world.php"
 }

@@ -56,41 +56,10 @@ object NetworkModule {
             .build()
     }
 
-
-    /*@Singleton
+    @Singleton
     @Provides
     fun provideNetworkRepositoryApi(retrofit: Retrofit): NetworkRepository {
         return NetworkRepository(retrofit.create(NetworkRepositoryApi::class.java))
-    }*/
-
-    @Singleton
-    @Provides
-    @Named("token")
-    fun getToken() : String{
-        return  "Token BuvYvhvyhcfkgufJvhf768686Hvhchvh"
     }
 
-
-    @Singleton
-    @Provides
-    fun createNetworkRepository(): NetworkRepository {
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-
-        val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-            .connectTimeout((180).toLong(), TimeUnit.SECONDS)
-            .readTimeout((180).toLong(), TimeUnit.SECONDS)
-            .writeTimeout((180).toLong(), TimeUnit.SECONDS)
-            .addInterceptor(loggingInterceptor)
-            .build()
-
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create(Gson()))
-            .build()
-
-        return NetworkRepository(retrofit.create(NetworkRepositoryApi::class.java))
-    }
 }
