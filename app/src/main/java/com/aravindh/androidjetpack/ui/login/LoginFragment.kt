@@ -6,27 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.aravindh.androidjetpack.databinding.FragmentLoginBinding
-import com.aravindh.androidjetpack.network.Status
 import com.aravindh.androidjetpack.utils.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-
-    //    private val viewModel: LoginViewModel by viewModels()
     private val viewModel: LoginViewModel by viewModels()
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,23 +31,16 @@ class LoginFragment : Fragment() {
     }
 
     private fun init() {
-        Logger.d("token : ${viewModel.getToken()}")
 
-        viewModel.employees.observe(viewLifecycleOwner, {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        Logger.d("SUCCESS")
-                        resource.data?.let { world -> world.toString() }
-                    }
-                    Status.ERROR -> {
-                        Logger.d("ERROR")
-                    }
-                    Status.LOADING -> {
-                        Logger.d("LOADING")
-                    }
+        lifecycleScope.launchWhenStarted {
+            viewModel.login.collect { event ->
+                when (event) {
+                    is LoginViewModel.LoginEvent.Loading -> Logger.d("Loading")
+                    is LoginViewModel.LoginEvent.Failure -> Logger.d(event.errorText)
+                    is LoginViewModel.LoginEvent.Success -> Logger.d(event.workDataResponse.toString())
+                    else -> Unit
                 }
             }
-        })
+        }
     }
 }

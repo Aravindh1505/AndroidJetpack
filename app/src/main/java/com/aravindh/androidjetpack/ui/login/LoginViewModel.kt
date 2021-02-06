@@ -1,31 +1,45 @@
 package com.aravindh.androidjetpack.ui.login
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.aravindh.androidjetpack.network.NetworkRepository
-import com.aravindh.androidjetpack.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 @HiltViewModel
 class LoginViewModel @Inject constructor(val networkRepository: NetworkRepository) :
     ViewModel() {
 
+    private val _login = MutableStateFlow<LoginEvent>(LoginEvent.Empty)
+    val login: StateFlow<LoginEvent> = _login
 
-    val employees = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null, message = "Loading"))
-        try {
-            emit(Resource.success(data = networkRepository.getEmployees(), message = "Success"))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+    sealed class LoginEvent {
+        class Success(val workDataResponse: WorldDataResponse?) : LoginEvent()
+        class Failure(val errorText: String?) : LoginEvent()
+        object Loading : LoginEvent()
+        object Empty : LoginEvent()
+    }
+
+
+    init {
+        callAPI()
+    }
+
+    fun callAPI() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _login.value = LoginEvent.Loading
+
+            try {
+                val response = networkRepository.getEmployees()
+                _login.value = LoginEvent.Success(response)
+            } catch (e: Exception) {
+                _login.value = LoginEvent.Failure(e.message)
+            }
         }
     }
-
-    fun getToken(): String {
-        return "Auth-Token"
-    }
-
 }
