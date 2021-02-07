@@ -1,5 +1,7 @@
 package com.aravindh.androidjetpack.di
 
+import android.app.Application
+import com.aravindh.androidjetpack.connectivity.ConnectivityManager
 import com.aravindh.androidjetpack.network.ApiConstant.BASE_URL
 import com.aravindh.androidjetpack.network.NetworkRepository
 import com.aravindh.androidjetpack.network.NetworkRepositoryApi
@@ -8,6 +10,7 @@ import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,6 +39,7 @@ object NetworkModule {
             .connectTimeout((180).toLong(), TimeUnit.SECONDS)
             .readTimeout((180).toLong(), TimeUnit.SECONDS)
             .writeTimeout((180).toLong(), TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
             .addInterceptor(loggingInterceptor)
             .build()
     }
@@ -57,6 +61,12 @@ object NetworkModule {
     @Provides
     fun provideNetworkRepositoryApi(retrofit: Retrofit): NetworkRepository {
         return NetworkRepository(retrofit.create(NetworkRepositoryApi::class.java))
+    }
+
+    @Singleton
+    @Provides
+    fun provideConnectivityManager(application: Application): ConnectivityManager {
+        return ConnectivityManager(application)
     }
 
 }

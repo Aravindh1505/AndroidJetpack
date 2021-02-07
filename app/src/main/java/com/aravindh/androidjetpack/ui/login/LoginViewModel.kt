@@ -1,7 +1,11 @@
 package com.aravindh.androidjetpack.ui.login
 
+import android.app.Application
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aravindh.androidjetpack.connectivity.ConnectivityManager
 import com.aravindh.androidjetpack.network.NetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +19,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(val networkRepository: NetworkRepository) :
     ViewModel() {
 
+
     private val _login = MutableStateFlow<LoginEvent>(LoginEvent.Empty)
     val login: StateFlow<LoginEvent> = _login
 
@@ -25,10 +30,6 @@ class LoginViewModel @Inject constructor(val networkRepository: NetworkRepositor
         object Empty : LoginEvent()
     }
 
-
-    init {
-        callAPI()
-    }
 
     fun callAPI() {
         viewModelScope.launch(Dispatchers.IO) {

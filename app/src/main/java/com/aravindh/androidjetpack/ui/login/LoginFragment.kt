@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.aravindh.androidjetpack.connectivity.ConnectivityManager
 import com.aravindh.androidjetpack.databinding.FragmentLoginBinding
 import com.aravindh.androidjetpack.utils.Logger
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +32,15 @@ class LoginFragment : Fragment() {
     }
 
     private fun init() {
+
+        binding.buttonLogin.setOnClickListener {
+            if (ConnectivityManager.isNetworkConnected) {
+                viewModel.callAPI()
+            } else {
+                Logger.d("Network not connected...")
+            }
+        }
+
 
         lifecycleScope.launchWhenStarted {
             viewModel.login.collect { event ->
