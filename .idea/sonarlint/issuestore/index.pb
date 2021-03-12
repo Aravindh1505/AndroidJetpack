@@ -35,3 +35,13 @@ q
 Aapp/src/main/java/com/aravindh/androidjetpack/di/NetworkModule.kt,5\f\5f50bbd1b4531eaef8cbbd0fb99d3af0a86e113b
 r
 Bapp/src/main/java/com/aravindh/androidjetpack/base/BaseActivity.kt,d\a\da9f7351d0559e4650c23f66a8f0c4810438a893
+Ä
+Papp/src/main/java/com/aravindh/androidjetpack/connectivity/ConnectionLiveData.kt,d\0\d0a43c9529e0aec6f6622a766f4356771ff73a54
+Å
+Qapp/src/main/java/com/aravindh/androidjetpack/connectivity/ConnectivityManager.kt,3\4\34480a888f26e22d467c79385835bd35e0bdd82a
+Ö
+Uapp/src/main/java/com/aravindh/androidjetpack/connectivity/DoesNetworkHaveInternet.kt,f\2\f20d4560b8aa9830925fb8a5f0a2ae21ad10623a
+l
+<app/src/main/java/com/aravindh/androidjetpack/utils/Utils.kt,5\b\5b448876c4805b520ab8c234a3176d527ac36437
+y
+Iapp/src/main/java/com/aravindh/androidjetpack/workmanager/UploadWorker.kt,7\6\76f95fbfc2da3e2a02fd85f875355704860129e5

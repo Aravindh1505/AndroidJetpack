@@ -2,8 +2,14 @@ package com.aravindh.androidjetpack
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.work.*
 import com.aravindh.androidjetpack.base.BaseActivity
 import com.aravindh.androidjetpack.databinding.ActivityMainBinding
+import com.aravindh.androidjetpack.utils.Logger
+import com.aravindh.androidjetpack.workmanager.CustomWorkManager
+import com.aravindh.androidjetpack.workmanager.INPUT_DATA
+import com.aravindh.androidjetpack.workmanager.UploadWorker
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : BaseActivity() {
@@ -14,16 +20,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-
-       /* lifecycleScope.launchWhenStarted {
-            connectivityManager.isNetworkAvailable.collect {
-                Logger.d("isNetworkAvailable : $it")
-
-                if (it) {
-                    val response = networkRepository.getEmployees()
-                    Logger.d("getEmployees response : $response")
-                }
-            }
-        }*/
+        CustomWorkManager(application).workManagerPeriodicWorkRequestBuilder()
     }
 }
