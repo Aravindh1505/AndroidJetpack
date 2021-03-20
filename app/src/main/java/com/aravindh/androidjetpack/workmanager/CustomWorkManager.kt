@@ -49,6 +49,7 @@ class CustomWorkManager(private val applicationContext: Application) {
         /*Work Request*/
         val uploadWorkRequest = PeriodicWorkRequestBuilder<UploadWorker>(20, TimeUnit.MINUTES)
             .setInputData(dataInput)
+            .setConstraints(constraints)
             .build()
 
         /*Enqueue*/

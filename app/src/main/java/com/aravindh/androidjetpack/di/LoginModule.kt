@@ -15,4 +15,5 @@ object LoginModule {
     @Provides
     @Named("sample")
     fun provideLocalString() = "This is sample to test hilt"
+
 }

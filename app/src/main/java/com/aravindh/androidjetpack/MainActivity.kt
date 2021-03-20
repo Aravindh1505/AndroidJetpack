@@ -2,7 +2,6 @@ package com.aravindh.androidjetpack
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.work.*
 import com.aravindh.androidjetpack.base.BaseActivity
 import com.aravindh.androidjetpack.databinding.ActivityMainBinding
 import com.aravindh.androidjetpack.workmanager.CustomWorkManager
@@ -16,6 +15,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        CustomWorkManager(application).workManagerPeriodicWorkRequestBuilder()
+//        CustomWorkManager(application).workManagerPeriodicWorkRequestBuilder()
     }
 }

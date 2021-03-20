@@ -2,19 +2,16 @@ package com.aravindh.androidjetpack.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aravindh.androidjetpack.connectivity.ConnectivityManager
 import com.aravindh.androidjetpack.network.NetworkRepository
-import com.aravindh.androidjetpack.utils.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(val networkRepository: NetworkRepository, val connectivityManager: ConnectivityManager) :
+class TempViewModel @Inject constructor(val networkRepository: NetworkRepository) :
     ViewModel() {
 
 
@@ -28,22 +25,12 @@ class LoginViewModel @Inject constructor(val networkRepository: NetworkRepositor
         object Empty : LoginEvent()
     }
 
-    init {
-        viewModelScope.launch {
-            connectivityManager.isNetworkAvailable.collect {
-                Logger.d("LoginViewModel isNetworkAvailable : $it")
-            }
-        }
-    }
-
 
     fun callAPI() {
         viewModelScope.launch(Dispatchers.IO) {
             _login.value = LoginEvent.Loading
 
             try {
-
-
                 val response = networkRepository.getEmployees()
                 _login.value = LoginEvent.Success(response)
             } catch (e: Exception) {

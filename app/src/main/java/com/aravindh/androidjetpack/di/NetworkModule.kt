@@ -69,4 +69,6 @@ object NetworkModule {
         return ConnectivityManager(application)
     }
 
+
+
 }
