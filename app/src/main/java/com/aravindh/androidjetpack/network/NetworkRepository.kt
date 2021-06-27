@@ -7,10 +7,7 @@ class NetworkRepository(api: NetworkRepositoryApi) {
 
     var networkRepositoryApi = api
 
-    suspend fun getEmployees(): WorldDataResponse? {
-        Logger.d("getEmployees api call.....")
-        return networkRepositoryApi.getEmployees()
-    }
+    suspend fun getEmployees(): WorldDataResponse? = networkRepositoryApi.getEmployees()
 
 
 }
